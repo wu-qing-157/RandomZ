@@ -9,8 +9,11 @@ fun select() {
     val list = mutableListOf<PickerItemView>()
     for (view in pickerHashSet) {
         if (!view.chosen) {
-            for (i in 0 until view.weight!!)
+            for (i in 0 until view.weight!!) {
                 list.add(view)
+                if (list.size > 10000)
+                    throw SumOfWeightToLargeException()
+            }
         }
     }
     if (list.isEmpty())
@@ -24,3 +27,5 @@ fun unselectAll() {
 }
 
 class NoAvailableItemException : Exception()
+
+class SumOfWeightToLargeException : Exception()

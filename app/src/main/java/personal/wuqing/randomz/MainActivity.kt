@@ -27,6 +27,11 @@ class MainActivity : AppCompatActivity() {
                 builder.setTitle(R.string.alert_title_picker_no_available_item)
                 builder.setMessage(R.string.alert_description_picker_no_available_item)
                 builder.show()
+            } catch (e: SumOfWeightToLargeException) {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(R.string.alert_title_picker_sum_of_weight_too_large)
+                builder.setMessage(R.string.alert_description_picker_sum_of_weight_too_large)
+                builder.show()
             } catch (e: NullPointerException) {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.alert_title_input_mismatch)
@@ -34,9 +39,8 @@ class MainActivity : AppCompatActivity() {
                 builder.show()
             }
         }
-        button_picker_unselect_all.setOnClickListener {
-            unselectAll()
-        }
+
+        button_picker_unselect_all.setOnClickListener { unselectAll() }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,5 +51,12 @@ class MainActivity : AppCompatActivity() {
             true
         }
         initPickerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        layout_picker_items.removeAllViews()
+        for (view in pickerHashSet)
+            layout_picker_items.addView(view)
     }
 }

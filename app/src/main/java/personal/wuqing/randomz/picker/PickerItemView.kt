@@ -38,6 +38,12 @@ class PickerItemView(context: Context, defaultName: String) : LinearLayout(conte
                 }
         )
         textItemName.setText(defaultName)
+        textItemName.setOnFocusChangeListener { _, hasFocus ->
+            run {
+                if (hasFocus && textItemName.text.toString().matches(Regex("Item [0-9]+")))
+                    textItemName.setText("")
+            }
+        }
         this.addView(textItemName, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2f))
         textItemWeight = EditText(context)
         textItemWeight.inputType = EditorInfo.TYPE_CLASS_NUMBER
