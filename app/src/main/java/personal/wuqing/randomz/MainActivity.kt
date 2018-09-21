@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import personal.wuqing.randomz.picker.*
 
@@ -70,8 +71,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        layout_picker_items.removeAllViews()
-        for (view in pickerHashSet)
-            layout_picker_items.addView(view)
+        pickerHashSet.forEach {
+            (it.parent as? LinearLayout)?.removeView(it)
+            layout_picker_items.addView(it)
+        }
     }
 }

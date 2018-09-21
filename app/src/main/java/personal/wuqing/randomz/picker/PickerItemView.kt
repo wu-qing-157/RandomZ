@@ -47,13 +47,18 @@ class PickerItemView(context: Context, defaultName: String = "", defaultWeight: 
     init {
         name = defaultName
         weight = defaultWeight
+
         textViewItemName = TextView(context)
         textViewItemName.setTextColor(Color.BLACK)
         textViewItemWeight = TextView(context)
         textViewItemWeight.setTextColor(Color.BLACK)
+
         this.orientation = HORIZONTAL
+
         editTextItemName = EditText(context)
         editTextItemName.setHint(R.string.hint_item_name)
+        editTextItemName.setSelectAllOnFocus(true)
+        editTextItemName.setSingleLine()
         editTextItemName.addTextChangedListener(
                 object : TextWatcher {
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -64,15 +69,12 @@ class PickerItemView(context: Context, defaultName: String = "", defaultWeight: 
                     }
                 }
         )
-        editTextItemName.setOnFocusChangeListener { _, hasFocus ->
-            run {
-                if (hasFocus && editTextItemName.text.toString().matches(Regex("Item [0-9]+")))
-                    editTextItemName.setText("")
-            }
-        }
+
         editTextItemWeight = EditText(context)
         editTextItemWeight.inputType = EditorInfo.TYPE_CLASS_NUMBER
         editTextItemWeight.setHint(R.string.hint_item_weight)
+        editTextItemWeight.setSelectAllOnFocus(true)
+        editTextItemWeight.setSingleLine()
         editTextItemWeight.addTextChangedListener(
                 object : TextWatcher {
                     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -82,6 +84,7 @@ class PickerItemView(context: Context, defaultName: String = "", defaultWeight: 
                         unselectAll()
                     }
                 })
+
         unfreeze()
     }
 
