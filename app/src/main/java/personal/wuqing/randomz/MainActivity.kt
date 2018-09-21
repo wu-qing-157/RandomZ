@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 builder.show()
             } catch (e: NullPointerException) {
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle(R.string.alert_title_input_mismatch)
+                builder.setTitle(R.string.alert_title_picker_input_mismatch)
                 builder.setMessage(e.toString())
                 builder.show()
             }
