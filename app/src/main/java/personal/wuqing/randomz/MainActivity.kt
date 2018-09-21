@@ -5,7 +5,6 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_picker.*
 import personal.wuqing.randomz.picker.*
 
 class MainActivity : AppCompatActivity() {
@@ -44,14 +43,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navigation.setOnNavigationItemSelectedListener {
-            scrollView_main.removeAllViews()
-            scrollView_main.addView(when (it.itemId) {
-                R.id.navigation_picker -> layout_picker
-                else -> View(this)
-            })
+            scrollView_picker.visibility = if (it.itemId == R.id.navigation_picker) View.VISIBLE else View.GONE
             true
         }
-        initPickerView()
         navigation.selectedItemId = R.id.navigation_picker
     }
 }
