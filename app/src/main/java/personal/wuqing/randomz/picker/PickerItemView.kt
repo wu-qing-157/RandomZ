@@ -7,27 +7,54 @@ import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import personal.wuqing.randomz.R
 
-class PickerItemView(context: Context, defaultName: String) : LinearLayout(context) {
-    private var textItemName: EditText
-    private var textItemWeight: EditText
+class PickerItemView(context: Context, defaultName: String = "", defaultWeight: Int = 1) : LinearLayout(context) {
+    private var editTextItemName: EditText
+    private var editTextItemWeight: EditText
+    private var textViewItemName: TextView
+    private var textViewItemWeight: TextView
     private var name = ""
     var weight: Int? = 1
     var chosen = false
         set(value) {
             field = value
-            textItemName.setTextColor(if (value) Color.RED else Color.BLACK)
-            textItemWeight.setTextColor(if (value) Color.RED else Color.BLACK)
+            editTextItemName.setTextColor(if (value) Color.RED else Color.BLACK)
+            editTextItemWeight.setTextColor(if (value) Color.RED else Color.BLACK)
+            textViewItemName.setTextColor(if (value) Color.RED else Color.BLACK)
+            textViewItemWeight.setTextColor(if (value) Color.RED else Color.BLACK)
         }
 
-    constructor(context: Context) : this(context, context.getString(R.string.name_item_0))
+    constructor(context: Context) : this(context, "")
+
+    fun freeze() {
+        this.removeAllViews()
+        this.addView(textViewItemName, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2f))
+        this.addView(textViewItemWeight, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+        textViewItemName.text = name
+        textViewItemWeight.text = weight?.toString() ?: ""
+    }
+
+    fun unfreeze() {
+        this.removeAllViews()
+        this.addView(editTextItemName, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2f))
+        this.addView(editTextItemWeight, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+        editTextItemName.setText(name)
+        editTextItemWeight.setText(weight?.toString() ?: "")
+    }
 
     init {
+        name = defaultName
+        weight = defaultWeight
+        textViewItemName = TextView(context)
+        textViewItemName.setTextColor(Color.BLACK)
+        textViewItemWeight = TextView(context)
+        textViewItemWeight.setTextColor(Color.BLACK)
         this.orientation = HORIZONTAL
-        textItemName = EditText(context)
-        textItemName.setHint(R.string.hint_item_name)
-        textItemName.addTextChangedListener(
+        editTextItemName = EditText(context)
+        editTextItemName.setHint(R.string.hint_item_name)
+        editTextItemName.addTextChangedListener(
                 object : TextWatcher {
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -37,19 +64,16 @@ class PickerItemView(context: Context, defaultName: String) : LinearLayout(conte
                     }
                 }
         )
-        textItemName.setText(defaultName)
-        textItemName.setOnFocusChangeListener { _, hasFocus ->
+        editTextItemName.setOnFocusChangeListener { _, hasFocus ->
             run {
-                if (hasFocus && textItemName.text.toString().matches(Regex("Item [0-9]+")))
-                    textItemName.setText("")
+                if (hasFocus && editTextItemName.text.toString().matches(Regex("Item [0-9]+")))
+                    editTextItemName.setText("")
             }
         }
-        this.addView(textItemName, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2f))
-        textItemWeight = EditText(context)
-        textItemWeight.inputType = EditorInfo.TYPE_CLASS_NUMBER
-        textItemWeight.setText(weight.toString())
-        textItemWeight.setHint(R.string.hint_item_weight)
-        textItemWeight.addTextChangedListener(
+        editTextItemWeight = EditText(context)
+        editTextItemWeight.inputType = EditorInfo.TYPE_CLASS_NUMBER
+        editTextItemWeight.setHint(R.string.hint_item_weight)
+        editTextItemWeight.addTextChangedListener(
                 object : TextWatcher {
                     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
                     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
@@ -58,12 +82,12 @@ class PickerItemView(context: Context, defaultName: String) : LinearLayout(conte
                         unselectAll()
                     }
                 })
-        this.addView(textItemWeight, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+        unfreeze()
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        textItemName.setOnClickListener(l)
-        textItemWeight.setOnClickListener(l)
+        editTextItemName.setOnClickListener(l)
+        editTextItemWeight.setOnClickListener(l)
     }
 
     override fun hashCode() = name.hashCode()

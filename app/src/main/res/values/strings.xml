@@ -17,6 +17,8 @@
     <string name="name_select_one">Select ONE</string>
     <string name="name_unselect_all">Unselect All</string>
     <string name="name_item_0">Item 0</string>
+    <string name="name_freeze">Freeze</string>
+    <string name="name_unfreeze">Unfreeze</string>
     <string name="hint_item_name">The name of the item.</string>
     <string name="hint_item_weight">The weight (Possibility)</string>
 </resources>
