@@ -46,6 +46,6 @@ class MainActivity : AppCompatActivity() {
             scrollView_picker.visibility = if (it.itemId == R.id.navigation_picker) View.VISIBLE else View.GONE
             true
         }
-        navigation.selectedItemId = R.id.navigation_picker
+        initPickerView()
     }
 }
