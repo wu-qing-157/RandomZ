@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             builder.setNegativeButton(R.string.name_cancel, null)
             builder.show()
         }
-        button_picker_read.setOnClickListener { pickerRead(this) { updatePickerView() } }
+        button_picker_read.setOnClickListener { pickerRead(this, this::updatePickerView) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
