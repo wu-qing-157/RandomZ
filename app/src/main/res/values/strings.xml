@@ -1,15 +1,19 @@
 <resources>
     <string name="app_name">RandomZ</string>
-    <string name="title_picker">Picker</string>
-    <string name="title_shuffle">Shuffle</string>
-    <string name="title_group">Group</string>
     <string name="description_picker">Randomly choose several items from the given list.</string>
     <string name="description_picker_hint">To temporarily remove one item, just set the weight to 0.\nTo pick several items, just press Choose ONE for that several times.</string>
     <string name="alert_title_picker_no_available_item">No Available Item</string>
-    <string name="alert_title_picker_sum_of_weight_too_large">Sum of Weight Too Large</string>
-    <string name="alert_title_picker_input_mismatch">Input Mismatch</string>
     <string name="alert_description_picker_no_available_item">There is no unselected item with weight more than 0.</string>
+    <string name="alert_title_picker_sum_of_weight_too_large">Sum of Weight Too Large</string>
     <string name="alert_description_picker_sum_of_weight_too_large">The sum of weight of all unselected items should not exceed 10000.</string>
+    <string name="alert_title_picker_input_mismatch">Input Mismatch</string>
+    <string name="alert_title_picker_save">Save Picker</string>
+    <string name="alert_hint_picker_save">Name</string>
+    <string name="alert_title_picker_read">Choose Picker</string>
+
+    <string name="title_picker">Picker</string>
+    <string name="title_shuffle">Shuffle</string>
+    <string name="title_group">Group</string>
     <string name="name_item">Item Name</string>
     <string name="name_weight">Weight</string>
     <string name="name_add_item">Add Item</string>
@@ -19,6 +23,10 @@
     <string name="name_item_0">Item 0</string>
     <string name="name_freeze">Freeze</string>
     <string name="name_unfreeze">Unfreeze</string>
+    <string name="name_save">Save</string>
+    <string name="name_read">Read</string>
+    <string name="name_confirm">Confirm</string>
+    <string name="name_cancel">Cancel</string>
     <string name="hint_item_name">The name of the item.</string>
     <string name="hint_item_weight">The weight (Possibility)</string>
 </resources>

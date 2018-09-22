@@ -115,7 +115,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:text="@string/name_clear_all"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +127,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:text="@string/name_freeze"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -154,12 +152,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:text="@string/name_unselect_all"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_picker_select_one" />
+
+            <Button
+                android:id="@+id/button_picker_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/name_save"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_picker_unselect_all" />
+
+            <Button
+                android:id="@+id/button_picker_read"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/name_read"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_picker_save" />
 
             <TextView
                 android:id="@+id/textView_picker_hint"
@@ -171,7 +193,7 @@
                 android:text="@string/description_picker_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_unselect_all" />
+                app:layout_constraintTop_toBottomOf="@+id/button_picker_read" />
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>

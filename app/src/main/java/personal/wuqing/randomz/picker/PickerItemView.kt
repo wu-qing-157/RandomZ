@@ -10,12 +10,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import personal.wuqing.randomz.R
 
-class PickerItemView(context: Context, defaultName: String = "", defaultWeight: Int = 1) : LinearLayout(context) {
+class PickerItemView(context: Context, defaultName: String = "", defaultWeight: Int? = 1) : LinearLayout(context) {
     private var editTextItemName: EditText
     private var editTextItemWeight: EditText
     private var textViewItemName: TextView
     private var textViewItemWeight: TextView
-    private var name = ""
+    var name = ""
     var weight: Int? = 1
     var chosen = false
         set(value) {

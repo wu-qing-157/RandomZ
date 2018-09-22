@@ -4,11 +4,20 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import personal.wuqing.randomz.picker.*
 
 class MainActivity : AppCompatActivity() {
+    private fun updatePickerView() {
+        layout_picker_items.removeAllViews()
+        pickerHashSet.forEach {
+            (it.parent as? LinearLayout)?.removeView(it)
+            layout_picker_items.addView(it)
+        }
+    }
+
     private fun initPickerView() {
         button_picker_add_item.setOnClickListener {
             val view = PickerItemView(this, "Item ${++pickerItemCounter}")
@@ -55,8 +64,21 @@ class MainActivity : AppCompatActivity() {
             }
             button_picker_add_item.isEnabled = it.tag as Boolean
             button_picker_remove_all.isEnabled = it.tag as Boolean
+            button_picker_read.isEnabled = it.tag as Boolean
         }
         button_picker_unselect_all.setOnClickListener { unselectAll() }
+        button_picker_save.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.alert_title_picker_save)
+            val editTextName = EditText(this)
+            editTextName.setHint(R.string.alert_hint_picker_save)
+            editTextName.setSingleLine()
+            builder.setView(editTextName)
+            builder.setPositiveButton(R.string.name_confirm) { _, _ -> run { pickerSave(editTextName.text.toString(), this) } }
+            builder.setNegativeButton(R.string.name_cancel, null)
+            builder.show()
+        }
+        button_picker_read.setOnClickListener { pickerRead(this) { updatePickerView() } }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,9 +93,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        pickerHashSet.forEach {
-            (it.parent as? LinearLayout)?.removeView(it)
-            layout_picker_items.addView(it)
-        }
+        updatePickerView()
     }
 }
