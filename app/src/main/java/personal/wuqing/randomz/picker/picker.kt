@@ -1,6 +1,5 @@
 package personal.wuqing.randomz.picker
 
-import android.widget.LinearLayout
 import java.util.*
 
 val pickerHashSet = HashSet<PickerItemView>()
