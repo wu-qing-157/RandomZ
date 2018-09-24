@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             editTextName.setHint(R.string.alert_hint_picker_save)
             editTextName.setSingleLine()
             builder.setView(editTextName)
-            builder.setPositiveButton(R.string.name_confirm) { _, _ -> run { pickerSave(editTextName.text.toString(), this) } }
+            builder.setPositiveButton(R.string.name_confirm) { _, _ -> pickerSave(editTextName.text.toString(), this) }
             builder.setNegativeButton(R.string.name_cancel, null)
             builder.show()
         }
