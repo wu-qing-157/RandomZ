@@ -14,7 +14,7 @@ fun pickerSave(name: String, context: Context) {
     val id = System.currentTimeMillis().toString()
 
     // read current list
-    val initialListList = try {
+    val initialIdList = try {
         val listListInputStream = ObjectInputStream(context.openFileInput("id_list"))
         val ret = listListInputStream.readObject() as? MutableList<*>
                 ?: mutableListOf<String>()
@@ -25,15 +25,15 @@ fun pickerSave(name: String, context: Context) {
     }
 
     // generate the result list
-    val listList = mutableListOf<String>()
-    for (item in initialListList)
+    val idList = mutableListOf<String>()
+    for (item in initialIdList)
         if (item is String)
-            listList.add(item)
-    listList.add(id)
+            idList.add(item)
+    idList.add(id)
 
     // output the result list
     val listListOutputStream = ObjectOutputStream(context.openFileOutput("id_list", Context.MODE_PRIVATE))
-    listListOutputStream.writeObject(listList)
+    listListOutputStream.writeObject(idList)
     listListOutputStream.close()
 
     // output the name
@@ -79,8 +79,15 @@ fun pickerRead(context: Context, freeze: () -> Unit, updatePickerView: () -> Uni
 
                 val radioButton = RadioButton(context)
                 radioButton.id = pickerList.size - 1
-
                 radioButton.text = name
+                radioButton.tag = id
+                radioButton.setOnLongClickListener {
+                    idList.remove(it.tag as String)
+                    val listListOutputStream = ObjectOutputStream(context.openFileOutput("id_list", Context.MODE_PRIVATE))
+                    listListOutputStream.writeObject(idList)
+                    listListOutputStream.close()
+                    true
+                }
                 group.addView(radioButton)
             } catch (e: IOException) {
                 // do nothing
