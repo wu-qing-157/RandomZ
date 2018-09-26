@@ -49,22 +49,27 @@ class MainActivity : AppCompatActivity() {
                 builder.show()
             }
         }
-        button_picker_freeze.tag = true
         button_picker_freeze.setOnClickListener {
-            if (it.tag as Boolean) {
-                for (view in pickerHashSet)
-                    view.freeze()
-                button_picker_freeze.setText(R.string.name_unfreeze)
-                it.tag = false
-            } else {
-                for (view in pickerHashSet)
-                    view.unfreeze()
-                button_picker_freeze.setText(R.string.name_freeze)
-                it.tag = true
-            }
-            button_picker_add_item.isEnabled = it.tag as Boolean
-            button_picker_remove_all.isEnabled = it.tag as Boolean
-            button_picker_read.isEnabled = it.tag as Boolean
+            for (view in pickerHashSet)
+                view.isFrozen = true
+
+            button_picker_add_item.isEnabled = false
+            button_picker_remove_all.isEnabled = false
+            button_picker_read.isEnabled = false
+
+            button_picker_freeze.visibility = View.GONE
+            button_picker_unfreeze.visibility = View.VISIBLE
+        }
+        button_picker_unfreeze.setOnClickListener {
+            for (view in pickerHashSet)
+                view.isFrozen = true
+
+            button_picker_add_item.isEnabled = true
+            button_picker_remove_all.isEnabled = true
+            button_picker_read.isEnabled = true
+
+            button_picker_freeze.visibility = View.VISIBLE
+            button_picker_unfreeze.visibility = View.GONE
         }
         button_picker_unselect_all.setOnClickListener { unselectAll() }
         button_picker_save.setOnClickListener {

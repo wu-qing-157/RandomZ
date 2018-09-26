@@ -8,7 +8,7 @@ var pickerItemCounter = 0
 fun select() {
     val list = mutableListOf<PickerItemView>()
     for (view in pickerHashSet) {
-        if (!view.chosen) {
+        if (!view.isChosen) {
             for (i in 0 until view.weight!!) {
                 list.add(view)
                 if (list.size > 10000)
@@ -18,12 +18,12 @@ fun select() {
     }
     if (list.isEmpty())
         throw NoAvailableItemException()
-    list[Random().nextInt(list.size)].chosen = true
+    list[Random().nextInt(list.size)].isChosen = true
 }
 
 fun unselectAll() {
     for (view in pickerHashSet)
-        view.chosen = false
+        view.isChosen = false
 }
 
 class NoAvailableItemException : Exception()
