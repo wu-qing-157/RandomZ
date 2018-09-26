@@ -10,8 +10,10 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
 fun pickerSave(name: String, context: Context) {
-    val list = pickerHashSet.map { Pair(it.name, it.weight) }
+    val list = pickerItemList.map { Pair(it.name, it.weight) }
     val id = System.currentTimeMillis().toString()
+
+    // read current list
     val initialListList = try {
         val listListInputStream = ObjectInputStream(context.openFileInput("id_list"))
         val ret = listListInputStream.readObject() as? MutableList<*>
@@ -21,25 +23,33 @@ fun pickerSave(name: String, context: Context) {
     } catch (e: IOException) {
         mutableListOf<String>()
     }
+
+    // generate the result list
     val listList = mutableListOf<String>()
     for (item in initialListList)
         if (item is String)
             listList.add(item)
     listList.add(id)
+
+    // output the result list
     val listListOutputStream = ObjectOutputStream(context.openFileOutput("id_list", Context.MODE_PRIVATE))
     listListOutputStream.writeObject(listList)
     listListOutputStream.close()
-    val nameOutputStream = context.openFileOutput("_$id", Context.MODE_PRIVATE)
+
+    // output the name
+    val nameOutputStream = context.openFileOutput("name_$id", Context.MODE_PRIVATE)
     nameOutputStream.write(name.toByteArray())
     nameOutputStream.close()
-    val outputStream = context.openFileOutput(id, Context.MODE_PRIVATE)
+
+    // output the content of the item
+    val outputStream = context.openFileOutput("content_$id", Context.MODE_PRIVATE)
     val objectOutputStream = ObjectOutputStream(outputStream)
     objectOutputStream.writeObject(list)
     objectOutputStream.close()
 }
 
-val listList = mutableListOf<List<*>>()
 fun pickerRead(context: Context, updatePickerView: () -> Unit) {
+    // read the idList from file
     val idList = try {
         val idListInputStream = ObjectInputStream(context.openFileInput("id_list"))
         val ret = idListInputStream.readObject() as? MutableList<*> ?: mutableListOf<String>()
@@ -48,27 +58,34 @@ fun pickerRead(context: Context, updatePickerView: () -> Unit) {
     } catch (e: Exception) {
         mutableListOf<String>()
     }
+
     val group = RadioGroup(context)
     group.orientation = RadioGroup.VERTICAL
-    listList.clear()
+    val pickerList = mutableListOf<List<*>>()
     for (id in idList)
         if (id is String)
             try {
-                val radioButton = RadioButton(context)
-                radioButton.id = listList.size
-                val inputStream = context.openFileInput(id)
-                listList.add(ObjectInputStream(inputStream).readObject() as List<*>)
+                // read the content of this item
+                val inputStream = context.openFileInput("content_$id")
+                pickerList.add(ObjectInputStream(inputStream).readObject() as List<*>)
                 inputStream.close()
-                val nameInputStream = context.openFileInput("_$id")
+
+                // read the name of this item
+                val nameInputStream = context.openFileInput("name_$id")
                 val nameBytes = ByteArray(nameInputStream.available())
                 nameInputStream.read(nameBytes)
                 nameInputStream.close()
                 val name = String(nameBytes)
+
+                val radioButton = RadioButton(context)
+                radioButton.id = pickerList.size - 1
+
                 radioButton.text = name
                 group.addView(radioButton)
             } catch (e: IOException) {
                 // do nothing
             }
+
     val builder = AlertDialog.Builder(context)
     builder.setTitle(R.string.alert_title_picker_read)
     builder.setView(group)
@@ -76,11 +93,11 @@ fun pickerRead(context: Context, updatePickerView: () -> Unit) {
         run {
             if (group.checkedRadioButtonId < 0)
                 return@run
-            pickerHashSet.clear()
-            val list = listList[group.checkedRadioButtonId]
+            pickerItemList.clear()
+            val list = pickerList[group.checkedRadioButtonId]
             for (item in list)
                 if (item is Pair<*, *> && item.first is String && item.second is Int?)
-                    pickerHashSet.add(PickerItemView(context, item.first as String, item.second as Int?))
+                    pickerItemList.add(PickerItemView(context, item.first as String, item.second as Int?))
             updatePickerView()
         }
     }

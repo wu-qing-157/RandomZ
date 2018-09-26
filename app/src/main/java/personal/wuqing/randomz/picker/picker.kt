@@ -2,12 +2,12 @@ package personal.wuqing.randomz.picker
 
 import java.util.*
 
-val pickerHashSet = HashSet<PickerItemView>()
+val pickerItemList = mutableListOf<PickerItemView>()
 var pickerItemCounter = 0
 
 fun select() {
     val list = mutableListOf<PickerItemView>()
-    for (view in pickerHashSet) {
+    for (view in pickerItemList) {
         if (!view.isChosen) {
             for (i in 0 until view.weight!!) {
                 list.add(view)
@@ -22,7 +22,7 @@ fun select() {
 }
 
 fun unselectAll() {
-    for (view in pickerHashSet)
+    for (view in pickerItemList)
         view.isChosen = false
 }
 

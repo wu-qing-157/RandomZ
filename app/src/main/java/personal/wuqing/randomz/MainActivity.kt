@@ -12,7 +12,7 @@ import personal.wuqing.randomz.picker.*
 class MainActivity : AppCompatActivity() {
     private fun updatePickerView() {
         layout_picker_items.removeAllViews()
-        pickerHashSet.forEach {
+        pickerItemList.forEach {
             (it.parent as? LinearLayout)?.removeView(it)
             layout_picker_items.addView(it)
         }
@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
     private fun initPickerView() {
         button_picker_add_item.setOnClickListener {
             val view = PickerItemView(this, "Item ${++pickerItemCounter}")
-            pickerHashSet.add(view)
+            pickerItemList.add(view)
             layout_picker_items.addView(view)
         }
         button_picker_remove_all.setOnClickListener {
-            pickerHashSet.clear()
+            pickerItemList.clear()
             layout_picker_items.removeAllViews()
             pickerItemCounter = 0
         }
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
         checkBox_picker_freeze.setOnCheckedChangeListener { _, isChecked ->
             run {
-                pickerHashSet.forEach { it.isFrozen = isChecked }
+                pickerItemList.forEach { it.isFrozen = isChecked }
                 listOf(button_picker_add_item,
                         button_picker_remove_all,
                         button_picker_read).forEach { it.isEnabled = !isChecked }
