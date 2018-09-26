@@ -7,6 +7,7 @@
     <string name="alert_title_picker_sum_of_weight_too_large">Sum of Weight Too Large</string>
     <string name="alert_description_picker_sum_of_weight_too_large">The sum of weight of all unselected items should not exceed 10000.</string>
     <string name="alert_title_picker_input_mismatch">Input Mismatch</string>
+    <string name="alert_description_picker_input_mismatch">Some weight is not an integer</string>
     <string name="alert_title_picker_save">Save Picker</string>
     <string name="alert_hint_picker_save">Name</string>
     <string name="alert_title_picker_read">Choose Picker</string>

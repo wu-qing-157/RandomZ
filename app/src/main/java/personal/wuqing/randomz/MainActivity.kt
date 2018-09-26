@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: NullPointerException) {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.alert_title_picker_input_mismatch)
-                builder.setMessage(e.toString())
+                builder.setMessage(R.string.alert_description_picker_input_mismatch)
                 builder.show()
             }
         }
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             builder.setNegativeButton(R.string.name_cancel, null)
             builder.show()
         }
-        button_picker_read.setOnClickListener { pickerRead(this, this::updatePickerView) }
+        button_picker_read.setOnClickListener { pickerRead(this, { checkBox_picker_freeze.isChecked = true }, this::updatePickerView) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -119,8 +119,4 @@ class PickerItemView(context: Context, defaultName: String = "", defaultWeight: 
         editTextItemName.setOnClickListener(l)
         editTextItemWeight.setOnClickListener(l)
     }
-
-    override fun hashCode() = name.hashCode()
-
-    override fun equals(other: Any?) = this === other
 }

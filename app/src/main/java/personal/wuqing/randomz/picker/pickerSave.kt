@@ -48,7 +48,7 @@ fun pickerSave(name: String, context: Context) {
     objectOutputStream.close()
 }
 
-fun pickerRead(context: Context, updatePickerView: () -> Unit) {
+fun pickerRead(context: Context, freeze: () -> Unit, updatePickerView: () -> Unit) {
     // read the idList from file
     val idList = try {
         val idListInputStream = ObjectInputStream(context.openFileInput("id_list"))
@@ -99,6 +99,7 @@ fun pickerRead(context: Context, updatePickerView: () -> Unit) {
                 if (item is Pair<*, *> && item.first is String && item.second is Int?)
                     pickerItemList.add(PickerItemView(context, item.first as String, item.second as Int?))
             updatePickerView()
+            freeze()
         }
     }
     builder.show()
