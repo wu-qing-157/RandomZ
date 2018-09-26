@@ -49,27 +49,13 @@ class MainActivity : AppCompatActivity() {
                 builder.show()
             }
         }
-        button_picker_freeze.setOnClickListener {
-            for (view in pickerHashSet)
-                view.isFrozen = true
-
-            button_picker_add_item.isEnabled = false
-            button_picker_remove_all.isEnabled = false
-            button_picker_read.isEnabled = false
-
-            button_picker_freeze.visibility = View.GONE
-            button_picker_unfreeze.visibility = View.VISIBLE
-        }
-        button_picker_unfreeze.setOnClickListener {
-            for (view in pickerHashSet)
-                view.isFrozen = true
-
-            button_picker_add_item.isEnabled = true
-            button_picker_remove_all.isEnabled = true
-            button_picker_read.isEnabled = true
-
-            button_picker_freeze.visibility = View.VISIBLE
-            button_picker_unfreeze.visibility = View.GONE
+        checkBox_picker_freeze.setOnCheckedChangeListener { _, isChecked ->
+            run {
+                pickerHashSet.forEach { it.isFrozen = isChecked }
+                listOf(button_picker_add_item,
+                        button_picker_remove_all,
+                        button_picker_read).forEach { it.isEnabled = !isChecked }
+            }
         }
         button_picker_unselect_all.setOnClickListener { unselectAll() }
         button_picker_save.setOnClickListener {

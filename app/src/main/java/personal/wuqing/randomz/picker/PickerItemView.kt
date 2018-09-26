@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -95,16 +96,18 @@ class PickerItemView(context: Context, defaultName: String = "", defaultWeight: 
                     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
                     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
                     override fun afterTextChanged(s: Editable) {
-                        weight = s.toString().toIntOrNull()
-                        unselectAll()
+                        if (editTextItemWeight.tag == null) {
+                            weight = s.toString().toIntOrNull()
+                            unselectAll()
+                        }
                     }
                 })
 
-        layoutUnfrozen.addView(textViewItemName, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2f))
-        layoutUnfrozen.addView(textViewItemWeight, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+        layoutUnfrozen.addView(editTextItemName, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2f))
+        layoutUnfrozen.addView(editTextItemWeight, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
 
-        addView(layoutFrozen)
-        addView(layoutUnfrozen)
+        addView(layoutFrozen, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        addView(layoutUnfrozen, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         name = defaultName
         weight = defaultWeight

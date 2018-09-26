@@ -97,6 +97,18 @@
                     android:orientation="vertical" />
             </LinearLayout>
 
+            <CheckBox
+                android:id="@+id/checkBox_picker_freeze"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/name_freeze"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_picker_item_table" />
+
             <Button
                 android:id="@+id/button_picker_select_one"
                 android:layout_width="0dp"
@@ -108,7 +120,7 @@
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_picker_item_table" />
+                app:layout_constraintTop_toBottomOf="@+id/checkBox_picker_freeze" />
 
             <Button
                 android:id="@+id/button_picker_unselect_all"
@@ -172,39 +184,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_picker_add_item" />
 
-            <Button
-                android:id="@+id/button_picker_freeze"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/name_freeze"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_remove_all" />
-
-            <Button
-                android:id="@+id/button_picker_unfreeze"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/name_unfreeze"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_freeze" />
-
             <TextView
                 android:id="@+id/textView_picker_hint"
                 android:layout_width="368dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="@string/description_picker_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_unfreeze" />
+                app:layout_constraintTop_toBottomOf="@+id/button_picker_remove_all" />
+
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
