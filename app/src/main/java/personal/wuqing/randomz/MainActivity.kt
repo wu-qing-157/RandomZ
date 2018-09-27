@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                     pickerItemList.clear()
                     layout_picker_items.removeAllViews()
                     pickerItemCounter = 0
+                    checkBox_picker_freeze.isChecked = false
                 }
             }
             builder.setNegativeButton(R.string.name_cancel, null)
