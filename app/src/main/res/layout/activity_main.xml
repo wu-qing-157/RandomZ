@@ -32,8 +32,10 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_picker"
@@ -99,99 +101,92 @@
 
             <CheckBox
                 android:id="@+id/checkBox_picker_freeze"
-                android:layout_width="0dp"
+                android:layout_width="116dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/name_freeze"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/button_picker_add_item"
+                app:layout_constraintEnd_toStartOf="@+id/button_picker_read"
+                app:layout_constraintStart_toEndOf="@+id/button_picker_remove_all"
+                app:layout_constraintTop_toTopOf="@+id/button_picker_add_item" />
+
+            <ImageButton
+                android:id="@+id/button_picker_add_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_picker_item_table" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_picker_item_table"
+                app:srcCompat="@android:drawable/ic_menu_add"
+                android:contentDescription="@string/name_add_item" />
+
+            <ImageButton
+                android:id="@+id/button_picker_remove_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/button_picker_add_item"
+                app:layout_constraintStart_toEndOf="@+id/button_picker_add_item"
+                app:layout_constraintTop_toTopOf="@+id/button_picker_add_item"
+                app:srcCompat="@android:drawable/ic_menu_delete"
+                android:contentDescription="@string/name_clear_all"/>
+
+            <ImageButton
+                android:id="@+id/button_picker_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/button_picker_add_item"
+                app:layout_constraintEnd_toStartOf="@+id/button_picker_save"
+                app:layout_constraintTop_toTopOf="@+id/button_picker_add_item"
+                app:srcCompat="@android:drawable/ic_menu_recent_history"
+                android:contentDescription="@string/name_read"/>
+
+            <ImageButton
+                android:id="@+id/button_picker_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/button_picker_add_item"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/button_picker_add_item"
+                app:srcCompat="@android:drawable/ic_menu_save"
+                android:contentDescription="@string/name_save"/>
 
             <Button
                 android:id="@+id/button_picker_select_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:text="@string/name_select_one"
                 android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/button_picker_unselect_all"
+                app:layout_constraintEnd_toStartOf="@+id/button_picker_unselect_all"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox_picker_freeze" />
+                app:layout_constraintTop_toTopOf="@+id/button_picker_unselect_all" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/button_picker_unselect_all"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/name_unselect_all"
-                android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_select_one" />
-
-            <Button
-                android:id="@+id/button_picker_save"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/name_save"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_unselect_all" />
-
-            <Button
-                android:id="@+id/button_picker_read"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/name_read"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_save" />
-
-            <Button
-                android:id="@+id/button_picker_add_item"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/name_add_item"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_read" />
-
-            <Button
-                android:id="@+id/button_picker_remove_all"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/name_clear_all"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_add_item" />
+                app:layout_constraintTop_toBottomOf="@+id/button_picker_add_item"
+                app:srcCompat="@android:drawable/ic_menu_revert"
+                android:contentDescription="@string/name_unselect_all"/>
 
             <TextView
                 android:id="@+id/textView_picker_hint"
                 android:layout_width="368dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@string/description_picker_hint"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_picker_remove_all" />
+                app:layout_constraintTop_toBottomOf="@+id/button_picker_unselect_all" />
 
         </android.support.constraint.ConstraintLayout>
 
