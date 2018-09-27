@@ -11,6 +11,7 @@
     <string name="alert_title_picker_save">Save Picker</string>
     <string name="alert_hint_picker_save">Name</string>
     <string name="alert_title_picker_read">Choose Picker</string>
+    <string name="alert_title_picker_remove_all">Remove All</string>
 
     <string name="title_picker">Picker</string>
     <string name="title_shuffle">Shuffle</string>
@@ -18,7 +19,7 @@
     <string name="name_item">Item Name</string>
     <string name="name_weight">Weight</string>
     <string name="name_add_item">Add Item</string>
-    <string name="name_clear_all">Clear All Items</string>
+    <string name="name_remove_all">Remove All Items</string>
     <string name="name_select_one">Select ONE</string>
     <string name="name_unselect_all">Unselect All</string>
     <string name="name_item_0">Item 0</string>

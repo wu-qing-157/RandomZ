@@ -1,9 +1,10 @@
 package personal.wuqing.randomz.picker
 
-import android.app.AlertDialog
+import android.support.v7.app.AlertDialog
 import android.content.Context
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.ScrollView
 import personal.wuqing.randomz.R
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -93,9 +94,12 @@ fun pickerRead(context: Context, freeze: () -> Unit, updatePickerView: () -> Uni
                 // do nothing
             }
 
+    val scrollView = ScrollView(context)
+    scrollView.addView(group)
+
     val builder = AlertDialog.Builder(context)
     builder.setTitle(R.string.alert_title_picker_read)
-    builder.setView(group)
+    builder.setView(scrollView)
     builder.setPositiveButton(R.string.name_confirm) { _, _ ->
         run {
             if (group.checkedRadioButtonId < 0)

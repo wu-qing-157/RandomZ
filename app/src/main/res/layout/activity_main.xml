@@ -132,7 +132,7 @@
                 app:layout_constraintStart_toEndOf="@+id/button_picker_add_item"
                 app:layout_constraintTop_toTopOf="@+id/button_picker_add_item"
                 app:srcCompat="@android:drawable/ic_menu_delete"
-                android:contentDescription="@string/name_clear_all"/>
+                android:contentDescription="@string/name_remove_all"/>
 
             <ImageButton
                 android:id="@+id/button_picker_read"
@@ -158,7 +158,7 @@
             <Button
                 android:id="@+id/button_picker_select_one"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:text="@string/name_select_one"
                 android:textAllCaps="false"

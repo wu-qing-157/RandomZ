@@ -25,9 +25,15 @@ class MainActivity : AppCompatActivity() {
             layout_picker_items.addView(view)
         }
         button_picker_remove_all.setOnClickListener {
-            pickerItemList.clear()
-            layout_picker_items.removeAllViews()
-            pickerItemCounter = 0
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.alert_title_picker_remove_all)
+            builder.setPositiveButton(R.string.name_confirm) {_, _-> run {
+                pickerItemList.clear()
+                layout_picker_items.removeAllViews()
+                pickerItemCounter = 0
+            }}
+            builder.setNegativeButton(R.string.name_cancel, null)
+            builder.show()
         }
         button_picker_select_one.setOnClickListener {
             try {
@@ -52,9 +58,7 @@ class MainActivity : AppCompatActivity() {
         checkBox_picker_freeze.setOnCheckedChangeListener { _, isChecked ->
             run {
                 pickerItemList.forEach { it.isFrozen = isChecked }
-                listOf(button_picker_add_item,
-                        button_picker_remove_all,
-                        button_picker_read).forEach { it.isEnabled = !isChecked }
+                button_picker_add_item.visibility = if (isChecked) View.INVISIBLE else View.VISIBLE
             }
         }
         button_picker_unselect_all.setOnClickListener { unselectAll() }
