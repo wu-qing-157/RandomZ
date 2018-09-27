@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import personal.wuqing.randomz.picker.*
 
@@ -27,11 +28,13 @@ class MainActivity : AppCompatActivity() {
         button_picker_remove_all.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle(R.string.alert_title_picker_remove_all)
-            builder.setPositiveButton(R.string.name_confirm) {_, _-> run {
-                pickerItemList.clear()
-                layout_picker_items.removeAllViews()
-                pickerItemCounter = 0
-            }}
+            builder.setPositiveButton(R.string.name_confirm) { _, _ ->
+                run {
+                    pickerItemList.clear()
+                    layout_picker_items.removeAllViews()
+                    pickerItemCounter = 0
+                }
+            }
             builder.setNegativeButton(R.string.name_cancel, null)
             builder.show()
         }
@@ -63,12 +66,36 @@ class MainActivity : AppCompatActivity() {
         }
         button_picker_unselect_all.setOnClickListener { unselectAll() }
         button_picker_save.setOnClickListener {
+            val stringBuilder = StringBuilder()
+            for ((index, value) in pickerItemList.withIndex())
+                stringBuilder.append(if (index == 0) value.name else ", ${value.name}")
+
+            val editTextName = EditText(this)
+            editTextName.setText(stringBuilder.toString())
+            editTextName.setSelectAllOnFocus(true)
+            editTextName.setSingleLine()
+            editTextName.tag = Any()
+            editTextName.setOnClickListener { _ ->
+                run {
+                    if (editTextName.tag != null) {
+                        editTextName.tag = null
+                        editTextName.selectAll()
+                    }
+                }
+            }
+
+            val textViewHint = TextView(this)
+            textViewHint.setText(R.string.alert_hint_picker_save)
+            textViewHint.labelFor = editTextName.id
+
+            val layout = LinearLayout(this)
+            layout.orientation = LinearLayout.VERTICAL
+            layout.addView(textViewHint)
+            layout.addView(editTextName)
+
             val builder = AlertDialog.Builder(this)
             builder.setTitle(R.string.alert_title_picker_save)
-            val editTextName = EditText(this)
-            editTextName.setHint(R.string.alert_hint_picker_save)
-            editTextName.setSingleLine()
-            builder.setView(editTextName)
+            builder.setView(layout)
             builder.setPositiveButton(R.string.name_confirm) { _, _ -> pickerSave(editTextName.text.toString(), this) }
             builder.setNegativeButton(R.string.name_cancel, null)
             builder.show()
